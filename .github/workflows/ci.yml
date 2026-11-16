@@ -1,0 +1,18 @@
+name: CI
+on: { push: { branches: [main] }, pull_request: {} }
+jobs:
+  lint-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive
+      - name: validate examples
+        run: |
+          for d in examples/*/; do terraform -chdir="$d" init -backend=false && terraform -chdir="$d" validate; done
+      - uses: terraform-linters/setup-tflint@v4
+      - run: tflint --recursive
+      - uses: aquasecurity/trivy-action@0.24.0
+        with: { scan-type: config, scan-ref: ., severity: HIGH,CRITICAL, exit-code: "1" }
+      - uses: bridgecrewio/checkov-action@v12
+        with: { directory: . }
