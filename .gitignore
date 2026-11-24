@@ -1,5 +1,4 @@
 .terraform/
 *.tfstate*
 test/.terraform*
-test/go.sum
 .terraform.lock.hcl

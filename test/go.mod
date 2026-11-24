@@ -1,5 +1,39 @@
 module github.com/padraigf/securebaseline/test
 
-go 1.22
+go 1.26.10
 
-require github.com/gruntwork-io/terratest v0.47.0
+require (
+	github.com/gruntwork-io/terratest v1.0.1
+	github.com/stretchr/testify v1.12.1
+)
+
+require (
+	github.com/agext/levenshtein v1.2.3 // indirect
+	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
+	github.com/apparentlymart/go-textseg/v17 v17.0.1 // indirect
+	github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d // indirect
+	github.com/hashicorp/errwrap v1.1.0 // indirect
+	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
+	github.com/hashicorp/go-getter/v2 v2.2.6 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
+	github.com/hashicorp/go-safetemp v1.0.0 // indirect
+	github.com/hashicorp/go-version v1.9.0 // indirect
+	github.com/hashicorp/hcl/v2 v2.25.0 // indirect
+	github.com/hashicorp/terraform-json v0.29.0 // indirect
+	github.com/jinzhu/copier v0.4.0 // indirect
+	github.com/klauspost/compress v1.20.5 // indirect
+	github.com/mattn/go-zglob v0.0.8 // indirect
+	github.com/mitchellh/go-homedir v1.1.0 // indirect
+	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
+	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
+	github.com/tmccombs/hcl2json v0.6.9 // indirect
+	github.com/ulikunitz/xz v0.5.17 // indirect
+	github.com/zclconf/go-cty v1.20.0 // indirect
+	go.yaml.in/yaml/v3 v3.0.6 // indirect
+	golang.org/x/crypto v0.59.0 // indirect
+	golang.org/x/mod v0.43.0 // indirect
+	golang.org/x/sync v0.25.0 // indirect
+	golang.org/x/sys v0.50.0 // indirect
+	golang.org/x/text v0.44.0 // indirect
+	golang.org/x/tools v0.53.0 // indirect
+)
