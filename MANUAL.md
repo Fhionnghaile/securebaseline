@@ -3,7 +3,7 @@
 *One page, eight blocks. Every figure here comes from this repository's own tests and README.*
 
 ## 1. Claim
-Four secure-by-default AWS modules (network, IAM baseline, logging, guardrails) pass validate, tflint, trivy and checkov in CI. Terratest asserts their behaviour after a real apply.
+Four secure-by-default AWS modules (network, IAM baseline, logging, guardrails) pass fmt, validate, tflint, trivy and checkov in CI, with every scanner exception justified in the code. Terratest applies the logging and network examples and checks their outputs.
 
 ## 2. What it is
 Reusable Terraform building blocks that make a new AWS environment safe by default: flow logs on, default security group shut, CloudTrail validated, public buckets flagged.
@@ -25,7 +25,7 @@ cd test && go test -timeout 30m
 ```
 
 ## 5. What you will see
-All static gates pass. Terratest applies each example, asserts the security property (for example, the default SG has zero rules; a deliberately public bucket is NON_COMPLIANT) and destroys it.
+All static gates pass. Terratest applies the logging and network examples, checks their outputs and destroys them; deeper behaviour assertions (default SG zero rules, NON_COMPLIANT public bucket) are planned.
 
 ## 6. 30-second talking point
 > Safety you have to remember to opt into gets forgotten. These modules make it the default and are tested like code, with four scanners plus behaviour tests against a real apply.

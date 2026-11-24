@@ -15,3 +15,8 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+variable "flow_log_retention_days" {
+  type        = number
+  default     = 365
+  description = "Days to keep VPC flow logs (CIS/checkov expect at least 365)."
+}

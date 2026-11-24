@@ -33,10 +33,44 @@ resource "aws_subnet" "private" {
   tags              = merge(var.tags, { Name = "${var.name}-private-${each.key}", Tier = "private" })
 }
 
-# VPC flow logs -> CloudWatch (required by the baseline).
+# VPC flow logs -> CloudWatch (required by the baseline), encrypted with a customer-managed key.
+data "aws_caller_identity" "me" {}
+data "aws_region" "current" {}
+
+resource "aws_kms_key" "flow" {
+  description             = "${var.name} VPC flow log encryption"
+  enable_key_rotation     = true
+  deletion_window_in_days = 30
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AccountAdministers"
+        Effect    = "Allow"
+        Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:root" }
+        Action    = "kms:*"
+        Resource  = "*"
+      },
+      {
+        Sid       = "CloudWatchLogsEncrypts"
+        Effect    = "Allow"
+        Principal = { Service = "logs.${data.aws_region.current.name}.amazonaws.com" }
+        Action    = ["kms:Encrypt*", "kms:Decrypt*", "kms:ReEncrypt*", "kms:GenerateDataKey*", "kms:Describe*"]
+        Resource  = "*"
+        Condition = {
+          ArnLike = {
+            "kms:EncryptionContext:aws:logs:arn" = "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.me.account_id}:log-group:/vpc/flow/${var.name}"
+          }
+        }
+      }
+    ]
+  })
+}
+
 resource "aws_cloudwatch_log_group" "flow" {
   name              = "/vpc/flow/${var.name}"
-  retention_in_days = 90
+  retention_in_days = var.flow_log_retention_days
+  kms_key_id        = aws_kms_key.flow.arn
 }
 
 data "aws_iam_policy_document" "flow_assume" {
