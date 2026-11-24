@@ -24,7 +24,7 @@ resource "aws_config_config_rule" "encrypted_volumes" {
   }
 }
 resource "aws_config_config_rule" "required_tags" {
-  name = "required-tags"
+  name             = "required-tags"
   input_parameters = jsonencode({ tag1Key = var.required_tag_key })
   source {
     owner             = "AWS"

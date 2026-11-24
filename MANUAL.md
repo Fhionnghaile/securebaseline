@@ -11,6 +11,9 @@ Reusable Terraform building blocks that make a new AWS environment safe by defau
 ## 3. Demo
 Capture to record: the static gates passing, and one Terratest run against a sandbox account.
 
+![Real test run, captured 24 Nov 2026](docs/test-run.svg)
+*Real `terraform fmt` and `terraform validate` output for every example, captured 24 Nov 2026. Terratest applies into a sandbox account and is not shown.*
+
 ## 4. Run it yourself
 **Prerequisites:** Terraform, tflint, trivy, checkov, Go (Terratest). A sandbox AWS account for Terratest.
 
