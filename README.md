@@ -4,7 +4,7 @@
 > **A library of secure-by-default Terraform modules, so a new environment starts safe.**  
 > **Result:** terraform fmt / validate / tflint / trivy / checkov all pass in CI, with every scanner exception written down and justified; Terratest apply-and-destroy tests for the logging and network examples.  
 > **Reproduce:** `terraform fmt -check -recursive && tflint --recursive && trivy config . && checkov -d .`  
-> ![CI](https://github.com/fhionnghaile/securebaseline/actions/workflows/ci.yml/badge.svg)
+> ![CI](https://github.com/fhionnghaile/securebaseline/actions/workflows/ci.yml/badge.svg) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Fhionnghaile/securebaseline/badge)](https://scorecard.dev/viewer/?uri=github.com/Fhionnghaile/securebaseline)
 >
 > **What this is worth:** You opt out of safety deliberately rather than remembering to opt in — the single biggest reducer of cloud-misconfig risk.
 
