@@ -14,7 +14,7 @@ jobs:
           for d in examples/*/; do terraform -chdir="$d" init -backend=false && terraform -chdir="$d" validate; done
       - uses: terraform-linters/setup-tflint@90f302c255ef959cbfb4bd10581afecdb7ece3e6 # v4
       - run: tflint --recursive
-      - uses: aquasecurity/trivy-action@0.35.0   # safe release after the March 2026 tag compromise (CVE-2026-33634)
+      - uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0, safe release after the March 2026 tag compromise (CVE-2026-33634)
         with: { scan-type: config, scan-ref: ., severity: HIGH,CRITICAL, exit-code: "1" }
       - uses: bridgecrewio/checkov-action@b782b35c8411ff565b881fba67ceebdb426d7dc4 # v12
         with: { directory: . }
